@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<!-- <!doctype html> MAKES WRPG SIZE FORM Copyright 2016 The NBG Authors. All rights reserved.
+     Use of this source code is governed by a BSD-style license that can be
+     found in the LICENSE file. -->
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+<!--  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:600' rel='stylesheet' type='text/css'>
+-->
+  <script src="https://code.jquery.com/jquery-2.1.3.js"></script><!--Get jquery library -->
+</head>
+
+<body>
+  <div id="container">
+    <h1>Nikolas To Do List </h1>
+    <div id="app">
+      <form id='add-form'>
+        <input id="create" name="itemDescription" type="text" placeholder="Add something to the list!">
+      </form>
+      <ul id='list'>
+      </ul>
+    </div>
+  </div>
+
+
+  <ul id='templates'>
+    <li class='item' data-id="some id">
+      <span class='complete-button'>&#10004;</span>
+      <div class="description">A stick of butter</div>
+      <span class="delete-button">&#10008;</span>
+    </li>
+  </ul>
+
+  <script src="app.js"></script>
+</body>
+</html>
