@@ -1,6 +1,7 @@
 body {
   /*background: url('debut_light.png')*/
-  background: url('IMG_0462.jpg')/* set Tami photo as background */
+  background: url('to-do-list-tools.jpeg')/* set Tami photo as background */
+
 }
 
 #container {
@@ -39,6 +40,7 @@ form {
   border-bottom:  2px  solid #7d82b0;
   border-top:     15px solid #477187;
   text-align:     left;/* move the text holder to left center;*/
+  font-style:     oblique; /*change the style to oblique*/
 }
 
 
