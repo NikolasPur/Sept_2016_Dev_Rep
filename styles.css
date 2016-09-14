@@ -1,12 +1,13 @@
 body {
   /*background: url('debut_light.png')*/
-  background: url('IMG_0462.jpg')/* set Tami photo as background */
+  background: url('to-do-list-tools.jpeg')/* set photo as background */
+
 }
 
 #container {
   width: 600px;
   font-family: 'Titillium Web', 'Arial', sans-serif;
-  font-size: 40px;
+  font-size: 20px; /* Change size of Welcome - h1
   text-align: center;
   margin: 40px auto;
 }
@@ -39,6 +40,7 @@ form {
   border-bottom:  2px  solid #7d82b0;
   border-top:     15px solid #477187;
   text-align:     left;/* move the text holder to left center;*/
+  font-style:     oblique; /*change the style to oblique*/
 }
 
 

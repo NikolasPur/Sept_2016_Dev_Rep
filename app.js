@@ -1,19 +1,28 @@
 var itemTemplate = $('#templates .item');
 var list         = $('#list');
 
+var  recoverDefPlaceHolder = function(itemData){
+    var tempElement = document.getElementById('create');
+
+    if(tempElement){
+        tempElement.placeholder = " Please add new task here!"
+    }
+}
 /* Function to create item from template , add data to item, add item to List*/
 var addItemToPage = function(itemData) {
     var item = itemTemplate.clone()
     item.attr('data-id',itemData.id)
-    item.attr('id',itemData.id) //Set Element id. Used for delete element
-    item.find('.description').text(itemData.description)//content of elememt, string
+    item.attr('id',itemData.id) //Set Element id. Used by deleteItemFromPage
+    item.attr('placeholder','Add task here')
+
+    item.find('.description').text(itemData.description)//content of elememt, inpudet string
 
     if(itemData.completed) {
         item.addClass('completed')
     }
     list.append(item)
-}
 
+}
 var deleteItemFromPage = function(itemData){
 
     //get id from response data, which equals to element id, as it was updated upon addItemToPage
@@ -34,9 +43,10 @@ var deleteItemFromPage = function(itemData){
 var loadRequest = $.ajax({
     type: 'GET',
     url: "https://listalous.herokuapp.com/lists/NIKOLAS_PUR_NIKA/"
+
+	//url: "https://localhost/ToDoList.dev/"
 })
 
-/*
 /*Now that we've made the request, we need to update the page whenever the request succeeds.*/
 loadRequest.done(function(dataFromServer) {
     var itemsData = dataFromServer.items
@@ -51,25 +61,25 @@ $('#add-form').on('submit', function(event) {
     event.preventDefault()// don't send form to server upon a submit and prevent the page from refreshing
 
     var itemDescription = event.target.itemDescription.value
-    //var itemId = event.target.attr('data-id');//?????
+
     /*Now that we've successfully listened for a form submission,
-    we're going to ask the server to save this item into the database
-     */
+    we're going to ask the server to save this item into the database*/
     var creationRequest = $.ajax({
         type: 'POST',
-        url: "http://listalous.herokuapp.com/lists/NIKOLAS_PUR_NIKA/items",
-        data: { description: itemDescription, completed: false }
+        //url: "http://listalous.herokuapp.com/lists/NIKOLAS_PUR_NIKA/items",
+		url: "http://localhost:8080/ToDoList.dev/html_req_handler.php",
+		data: { description: itemDescription, completed: false }
     })
+
     /*Finally, we need to add the new item to the list on client side.*/
-        creationRequest.done(function(itemDataFromServer) {
-            /*update the page with the data with which the server responds.*/
-            addItemToPage(itemDataFromServer)
-    })
+     creationRequest.done(function(itemDataFromServer) {
+        /*update the page with the data with which the server responds.*/
+        addItemToPage(itemDataFromServer)
+        recoverDefPlaceHolder(itemDataFromServer)
+        window.location = window.location
+     })
 })
 /* implement event handler for "complete check mark" in the list*/
-/*why if this function is implemente and isItemCompleted used instead of +isItemCompleted, nothing works!!!!?????
-alert('clicked item ' + itemId + ', which has completed currently set to '+isItemCompleted)
- */
 $('#list').on('click', '.complete-button', function(event) {
     var item = $(event.target).parent()
     var isItemCompleted = item.hasClass('completed')
@@ -84,8 +94,7 @@ $('#list').on('click', '.complete-button', function(event) {
     Finally, we'll update the item that has been marked as incomplete or complete.
     Instead of creating a new item, we'll simple add or remove the class 'completed'
     from the specified item (using jQuery's helpful addClass and removeClass functions).
-     This will cause the browser to render the item differently, based on the rules written in styles.css.
-    */
+    This will cause the browser to render the item differently, based on the rules written in styles.css.*/
     updateRequest.done(function(itemData) {
         if (itemData.completed) {
             item.addClass('completed')
@@ -95,9 +104,8 @@ $('#list').on('click', '.complete-button', function(event) {
     })
 })
 
-/*
-Allow users to delete items forever
-implement event handler for "delete check box" in the list*/
+/*Allow users to delete items forever.
+Implement event handler for "delete check box" in the list*/
 $('#list').on('click', '.delete-button', function(event) {
 
     var item = $(event.target).parent()
