@@ -11,15 +11,9 @@
 </head>
 
 <body>
-  <?php include 'html_req_handler.php';?>
+ <?php include_once 'post_req_handler.php';?>
+ <?php include_once 'get_req_handler.php';?>
 
-
-<!--
-  <?php db_add_item_to_tbl();?>
-  <?php db_delete_item_from_tbl();?>
-  <?php db_update_item_in_tbl();?>
-  <?php db_get_all_items_from_tbl();?>
--->
   
   <div id="container">
     <h1>Welcome: Insert Task here </h1>
@@ -40,6 +34,6 @@
     </li>
   </ul>
 
-  <script src="app.js"></script>
+  <script src="to_do_list.js"></script>
 </body>
 </html>
